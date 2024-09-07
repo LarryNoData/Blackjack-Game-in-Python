@@ -5,6 +5,7 @@ import subprocess
 import os
 
 player_status = 'neutral'
+round_1 = True
 
 
 home = True
@@ -81,17 +82,22 @@ while home == True:
         betting = True
       else:
         print (f'You have bet {bet} chips') 
-        betting = False
         chip_total = chip_total - bet
-      
+        break
     
     player_hand = (f'{player_card_1},{player_card_2}')
     print (f'Your hand is {player_hand}')
+
+
+
     if player_hand_total == 21:
       payout = (bet*2.5)
       print (f'Blackjack! You have won {payout}')
       chip_total = chip_total + payout
-      break
+      betting = True
+      round_1 == True
+      split == True
+      continue
 
 
 
@@ -127,7 +133,7 @@ while home == True:
     else:   
 
 
-      round_1 = True
+      
 
 
 
@@ -209,7 +215,6 @@ while home == True:
 
     if player_status == 'bust':
       print (f'You have lost this hand due to being bust.\n')
-      chip_total = chip_total - bet
       betting = True
       round_1 == True
       split == True
@@ -226,7 +231,6 @@ while home == True:
 
     if dealer_total > player_hand_total:
       print (f'You have lost this hand due to having a lower total than the dealer.\n')
-      chip_total = chip_total - bet
       betting = True
       round_1 == True
       split == True
