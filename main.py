@@ -215,7 +215,7 @@ while home == True:
       split == True
       continue
 
-    if dealer_status == 'bust':
+    if dealer_total > 21:
       print ('You have won!')
       print (f'You have won {bet*2} chips!\n')
       chip_total = chip_total + bet*2
