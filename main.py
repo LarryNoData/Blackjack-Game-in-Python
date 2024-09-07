@@ -63,6 +63,11 @@ while home == True:
     if see_chips in ['yes' , 'Yes' , 'y' , ' YEs' , 'YES' , 'yES' , 'yeS']:
       print(f'Your chip total is {chip_total}')
     
+
+
+    if chip_total <= 0:
+      print ('\nYou have run out of chips, and have therefore lost \n.')
+      break
     
 
 
@@ -199,12 +204,21 @@ while home == True:
 
       if dealer_total >= 17:
         dealer_status = 'stand'
-        print('\n Dealer stands.')
+        print('\n Dealer stands.\n')
       
 
     if player_status == 'bust':
       print (f'You have lost this hand due to being bust.\n')
       chip_total = chip_total - bet
+      betting = True
+      round_1 == True
+      split == True
+      continue
+
+    if dealer_status == 'bust':
+      print ('You have won!')
+      print (f'You have won {bet*2} chips!\n')
+      chip_total = chip_total + bet*2
       betting = True
       round_1 == True
       split == True
