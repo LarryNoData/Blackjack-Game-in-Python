@@ -29,7 +29,7 @@ while home == True:
   else:
     print ('You are old enough for this game, enjoy!')
   
-  ready = input ('Welcome to this free blackjack game! Would you like to play?".\n')
+  ready = input ('Welcome to this free blackjack game! Would you like to play?.\n')
   if ready in ['No' , 'no', 'NO' , 'nO']:
     answer_1 = input ('We are sorry to hear that, Can you please tell us why? If you answered "No" by mistake, please type "x".\n')
     if answer_1 == 'x':
@@ -54,11 +54,14 @@ while home == True:
     Q = 10
     K = 10
     A = 11
-    cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
+    #cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
+    cards = [2,2]
     #cards = [A,K]
     dealer_cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
 
+    no = 'no'
 
+    split = True 
 
     see_chips = input('Would you like to see your chip total\n')
     if see_chips in ['yes' , 'Yes' , 'y' , ' YEs' , 'YES' , 'yES' , 'yeS']:
@@ -106,6 +109,9 @@ while home == True:
 
     elif player_card_1 == player_card_2:
       while split == True:
+        if no == 'yes':
+          split = False
+          continue
         decision_1 = input('Would you like to split? \n')
         if decision_1 in ['Yes' , 'YES' ,  'yes']:
           split_bet = int(input('You have chosen to split, how much would you like to bet on your second hand? You can only bet up to your original bet.\n'))
@@ -116,15 +122,245 @@ while home == True:
           if chip_total < 0:
             print ("You don't have enough chips to complete that action, please try again.")
             continue
-          #this is where the split card sequence will be put in place
+          
+          player_card_3 = random.choice(cards)
+          first_hand_total = player_card_1 + player_card_3
+          player_card_4 = random.choice(cards)
+          second_hand_total = player_card_2 + player_card_4
+          
+
+
+          print (f'Your first split hand is: {player_card_1},{player_card_3}\n')
+
+          print (f'Your second split hand is: {player_card_2},{player_card_4}\n')
+
+          first_hand_desicion = True
+
+          while first_hand_desicion == True:
+            decision_split_1 = input('Would you like to hit, double down or stand?')
+            if decision_split_1 in ['Hit' , 'HIT' , 'hit']:
+              split_1_new_card = random.choice(cards)
+              first_hand_total = int(first_hand_total) + int(split_1_new_card)
+
+
+              if int(first_hand_total) > 21:
+                print (f'Your first hand total is {first_hand_total}, you have busted.\n')
+                player_status = 'bust'
+                first_hand_desicion = False
+                break
+
+
+              print (f'You have chosen to hit, your new card is:{split_1_new_card}')
+              print (f'Your first hand total is: {first_hand_total}\n')
+              continue
+
+
+            elif decision_split_1 in ['Stand', 'stand' , 'STAND']:
+          
+              player_new_card = 0
+              print (f'Your total is {first_hand_total}\n')
+              first_hand_desicion == False
+              break
+
+            else:
+              print('Invalid answer, please try again.')
+              continue
+
+
+
+          second_hand_desicion = True
+
+          print('Now on to your second hand.\n')
+          print(f'Your second hand is {player_card_2},{player_card_4}. Your second hand total is {second_hand_total}')
+          while second_hand_desicion == True:
+            
+            decision_split_2 = input('Would you like to hit, double down or stand?')
+            if decision_split_2 in ['Hit' , 'HIT' , 'hit']:
+              split_2_new_card = random.choice(cards)
+              second_hand_total = int(second_hand_total) + int(split_2_new_card)
+
+
+              if int(second_hand_total) > 21:
+                print (f'Your first hand total is {second_hand_total}, you have busted.\n')
+                player_status = 'bust'
+                second_hand_desicion = False
+                break
+
+
+              print (f'You have chosen to hit, your new card is:{split_2_new_card}')
+              print (f'Your hand total is: {second_hand_total}\n')
+              continue
+
+
+            elif decision_split_2 in ['Stand', 'stand' , 'STAND']:
+          
+              player_new_card = 0
+              print (f'Your total is {second_hand_total}\n')
+              second_hand_desicion == False
+              break
+
+          
+
+          time.sleep(2)
+          dealer_card_1 = random.choice(dealer_cards)
+          dealer_card_2 = random.choice(dealer_cards)
+          dealer_total = int(dealer_card_1) + int(dealer_card_2)
+          dealer_hand = (f'{dealer_card_1},{dealer_card_2}')
+          print (f"Dealer's hand is: {dealer_hand} \n Dealer's total is: {str(dealer_total)}")
+
+          dealer_total = int(dealer_card_1) + int(dealer_card_2)
+
+
+
+          if dealer_total == 21:
+            dealer_status = 'blackjack'
+            print ('\n Dealer has blackjack. You Lose')
+    
+          while dealer_total < 17:
+            dealer_new_card = random.choice(dealer_cards)
+            dealer_hand = (f'{dealer_card_1},{dealer_card_2},{dealer_new_card}')
+            dealer_total = dealer_total + int(dealer_new_card)
+            print (f"\nDealer Hits... \n \n Dealer's total is: {str(dealer_total)}\n" )
+    
+
+            next_dealer_round = str(input("Type 'y' to continue "))
+            next_dealer_round_pass = True
+    
+            if dealer_total >= 17:
+              break
+
+            while next_dealer_round_pass == True:
+              if next_dealer_round == 'y':
+                break
+
+              else:
+                continue
+      
+
+
+          if dealer_total > 21:
+            dealer_status = 'bust'
+            print ('\n Dealer is bust!')
+
+          if dealer_total >= 17:
+            dealer_status = 'stand'
+            print('\n Dealer stands.\n')
+      
+          
+
+          if first_hand_total > 21:
+            print (f'You have lost this hand due to being bust.\n')
+            betting = True
+            round_1 = True
+            split = True
+            
+
+          if dealer_total > 21:
+            print ('You have won!')
+            print (f'You have won {bet*2} chips!\n')
+            chip_total = chip_total + bet*2
+            betting = True
+            round_1 = True
+            split = True
+            
+
+          if dealer_total > first_hand_total:
+            print (f'You have lost this hand due to having a lower total than the dealer.\n')
+            betting = True
+            round_1 = True
+            split = True
+            
+            
+
+
+
+
+          if dealer_total < first_hand_total:
+            print ('You have won!')
+            print (f'You have won {bet*2} chips!\n')
+            chip_total = chip_total + bet*2
+            betting = True
+            round_1 = True
+            split = True
+            
+
+          if dealer_total == first_hand_total:
+            print ('You have pushed with the dealer\n')
+            chip_total = chip_total + bet
+            betting = True
+            round_1 = True
+            split = True
+            
+
+
+          if dealer_total > 21:
+            dealer_status = 'bust'
+            print ('\n Dealer is bust!')
+
+          if dealer_total >= 17:
+            dealer_status = 'stand'
+            print('\n Dealer stands.\n')
+      
+          
+
+          if second_hand_total > 21:
+            print (f'You have lost this hand due to being bust.\n')
+            betting = True
+            round_1 = True
+            split = False
+            
+
+          if dealer_total > 21:
+            print ('You have won!')
+            print (f'You have won {split_bet*2} chips!\n')
+            chip_total = chip_total + split_bet*2
+            betting = True
+            round_1 = True
+            split = False
+            
+
+          if dealer_total > second_hand_total:
+            print (f'You have lost this hand due to having a lower total than the dealer.\n')
+            betting = True
+            round_1 = True
+            split = False
+            
+
+
+
+
+          if dealer_total < second_hand_total:
+            print ('You have won!')
+            print (f'You have won {split_bet*2} chips!\n')
+            chip_total = chip_total + split_bet*2
+            betting = True
+            round_1 = True
+            split = False
+            
+
+          if dealer_total == second_hand_total:
+            print ('You have pushed with the dealer\n')
+            chip_total = chip_total + split_bet
+            betting = True
+            round_1 = True
+            split = False
+          break
+
+
+
+
+
         elif decision_1 in ['No' , 'NO' , 'no']:
           print ('You have chosen to not split')
-          split = False
-          break
+          no = 'yes'
+        
+        
         else:
           print ('That is an invalid answer, please try again')
           continue
 
+        
+        
 
 
 
