@@ -1,6 +1,6 @@
 Made by LarryNoData Games
 --------------------------------
-Beta 2
+Beta 3
 Version 0.0.04
 --------------------------------
 This BlackJack game is at its first stage of beta testing.
