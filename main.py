@@ -54,8 +54,8 @@ while home == True:
     Q = 10
     K = 10
     A = 11
-    #cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
-    cards = [2,2]
+    cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
+    #cards = [2,2]
     #cards = [A,K]
     dealer_cards = [A,2,3,4,5,6,7,8,9,10,J,Q,K]
 
@@ -98,16 +98,17 @@ while home == True:
       print (f'Blackjack! You have won {payout}')
       chip_total = chip_total + payout
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
 
 
 
 
 
-
     elif player_card_1 == player_card_2:
+
+
       while split == True:
         if no == 'yes':
           split = False
@@ -353,6 +354,7 @@ while home == True:
         elif decision_1 in ['No' , 'NO' , 'no']:
           print ('You have chosen to not split')
           no = 'yes'
+          
         
         
         else:
