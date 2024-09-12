@@ -451,11 +451,11 @@ while home == True:
         print('\n Dealer stands.\n')
       
 
-    if player_status == 'bust':
+    if player_hand_total > 21:
       print (f'You have lost this hand due to being bust.\n')
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
 
     if dealer_total > 21:
@@ -463,15 +463,15 @@ while home == True:
       print (f'You have won {bet*2} chips!\n')
       chip_total = chip_total + bet*2
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
 
     if dealer_total > player_hand_total:
       print (f'You have lost this hand due to having a lower total than the dealer.\n')
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
 
 
@@ -482,14 +482,14 @@ while home == True:
       print (f'You have won {bet*2} chips!\n')
       chip_total = chip_total + bet*2
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
 
     if dealer_total == player_hand_total:
       print ('You have pushed with the dealer\n')
       chip_total = chip_total + bet
       betting = True
-      round_1 == True
-      split == True
+      round_1 = True
+      split = True
       continue
