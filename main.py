@@ -377,6 +377,26 @@ while home == True:
 
       while round_1 == True:
         decision_1 = input('Would you like to hit, double down or stand?')
+        
+        
+        if decision_1 in ['double down','Double Down' , 'Double down' , 'double Down']:
+            print ('You have chosen to double down!\n')
+            bet = bet*2
+            chip_total = chip_total - bet/2
+            if bet > (chip_total + (bet/2)):
+                print('You do not have enough chips')
+                bet = bet/2
+                chip_total = chip_total + bet*2
+                continue
+            player_new_card = int(random.choice(cards))
+            player_hand_total = player_hand_total + player_new_card
+            
+            
+            print (f'Your new card is: {player_new_card}\n')
+            round_1 = False
+            continue
+            
+            
         if decision_1 in ['Hit' , 'HIT' , 'hit']:
           player_new_card = random.choice(cards)
           player_hand_total = int(player_hand_total) + int(player_new_card)
@@ -453,6 +473,7 @@ while home == True:
 
     if player_hand_total > 21:
       print (f'You have lost this hand due to being bust.\n')
+      chip_total = chip_total - bet
       betting = True
       round_1 = True
       split = True
@@ -469,6 +490,7 @@ while home == True:
 
     if dealer_total > player_hand_total:
       print (f'You have lost this hand due to having a lower total than the dealer.\n')
+      chip_total = chip_total - bet
       betting = True
       round_1 = True
       split = True
